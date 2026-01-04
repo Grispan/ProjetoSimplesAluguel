@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <title>Calculo de Aluguel</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="calc-page">
+    <h1>Calculadora de Aluguel</h1>
+    <main>
+      <form>
+         <div class="form-row">
+          <label for="numeromoradores">Número de Moradores Na Kit:</label>
+          <input type="number" id="numeromoradores" name="numeromoradores value="0.5" step="0.1" required>
+        </div>
+
+        
+         <div class="form-row">
+          <label for="moradoresluz">Número de usuários de Luz:</label>
+          <input type="number" id="moradoresluz" name="moradoresluz" value="0.5" step="0.1" required>
+        </div>
+
+        <div class="form-row">
+          <label for="moradoresagua">Número de usuários de Água:</label>
+          <input type="number" id="moradoresagua" name="moradoresagua" value="0.5" step="0.1" required>
+        </div>
+
+        <div class="form-row">
+          <label for="valorAluguel">Valor do Aluguel (R$):</label>
+          <input type="number" id="valorAluguel" name="valorAluguel" required>
+        </div>
+
+        <div class="form-row">
+          <label for="valoragua">Valor da Água (R$):</label>
+          <input type="number" id="valoragua" name="valoragua"  step="0.1" required>
+        </div>
+
+        <div class="form-row">
+          <label for="valorluz">Valor da Luz (R$):</label>
+          <input type="number" id="valorluz" name="valorluz"  step="0.1" required>
+        </div>
+
+        <button type="button" onclick="calcularAluguel()">Calcular Aluguel Mensal</button>
+      </form>
+
+      <h2 id="resultado"></h2>
+
+      <script>
+        function calcularAluguel() {
+          const numeromoradores = parseFloat(document.getElementById('numeromoradores').value);
+          const valorAluguel = parseFloat(document.getElementById('valorAluguel').value);
+          const valoragua = parseFloat(document.getElementById('valoragua').value);
+          const valorluz = parseFloat(document.getElementById('valorluz').value);
+          const moradoresluz = parseFloat(document.getElementById('moradoresluz').value);
+          const moradoresagua = parseFloat(document.getElementById('moradoresagua').value);
+           
+        
+
+        
+          // Calcula custo por morador
+          const custoLuzPorMorador = valorluz / moradoresluz;
+          const custoAguaPorMorador = valoragua / moradoresagua;
+          const valortotalcustos =( custoLuzPorMorador + custoAguaPorMorador) * numeromoradores;
+          // Soma aluguel + custos
+          const aluguelMensal = valorAluguel + valortotalcustos;
+
+          document.getElementById('resultado').innerText = `Aluguel: R$ ${valorAluguel.toFixed(2)} | Luz: R$ ${custoLuzPorMorador.toFixed(2)} | Água: R$ ${custoAguaPorMorador.toFixed(2)} | Total: R$ ${aluguelMensal.toFixed(2)}`;
+        }
+      </script>
+    </body>
+</html>
